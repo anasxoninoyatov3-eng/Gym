@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Antigravity Fitness - Gravitatsiyani unuting va tanangizni his qiling. Maxsus havo yogasi va fitness markazi.">
+    <title>EliteForm Fitness</title>
+    <!-- Fonts: Space Grotesk / Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Google OAuth Script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+    <!-- Background Decor Elements -->
+    <div class="bg-glow glow-blue"></div>
+    <div class="bg-glow glow-violet"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                EliteForm<span class="text-accent">FITNESS</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">Biz haqimizda</a></li>
+                <li><a href="#directions">Yoʻnalishlar</a></li>
+                <li><a href="#schedule">Jadval</a></li>
+                <li><a href="#membership">Tariflar</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-outline" id="btn-login">Kabinet</button>
+                <button class="btn btn-primary" id="btn-hero-cta">Bepul sinov</button>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero glass-panel" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge glow-badge">AI yo'riqnoma bilan ishlaydi</div>
+                <h1 class="hero-title">Gravitatsiyani unuting. <br> Tanangizni <span class="text-glow">his
+                        qiling.</span></h1>
+                <p class="hero-desc">An'anaviy fitnesdan qochib, havoda parvoz qilish zavqini tuying. Bo'g'imlarga
+                    bosimsiz, umurtqaga yengillik, moslashuvchanlikni oshiramiz.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary btn-large glow-btn" id="btn-primary-cta">Birinchi mashg'ulot
+                        bepul</button>
+                    <button class="btn btn-outline btn-large" id="btn-ai-guide">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+                        </svg>
+                        AI Dars Tanlash
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Abstract Premium SVG Illustration -->
+                <svg viewBox="0 0 500 500" class="hero-svg-art" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00F0FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7000FF;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="8" result="coloredBlur" />
+                            <feMerge>
+                                <feMergeNode in="coloredBlur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <path class="animated-path float" d="M250,50 Q400,100 450,250 T250,450 T50,250 T250,50 Z"
+                        fill="none" stroke="url(#grad1)" stroke-width="4" filter="url(#glow)" />
+                    <circle cx="250" cy="250" r="100" fill="none" stroke="#00F0FF" stroke-width="1"
+                        class="pulse-circle" />
+                    <path d="M 230 200 Q 250 150 270 200 T 250 300 Q 230 200 230 200" fill="none" stroke="#39FF14"
+                        stroke-width="2" class="float-delay" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container fade-in">
+            <h2 class="section-title">Antigravity nima o'zi?</h2>
+            <div class="about-grid">
+                <div class="about-card glass-panel">
+                    <div class="icon-wrap glow-blue-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                    <h3>Xavfsizlik</h3>
+                    <p>Maxsus hamaklar yordamida bo'g'imlar va umurtqaga tushuvchi ortiqcha yuklama nolga tushadi.</p>
+                </div>
+                <div class="about-card glass-panel">
+                    <div class="icon-wrap glow-violet-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </div>
+                    <h3>Moslashuvchanlik</h3>
+                    <p>Orqa miya dekompressiyasi qon aylanishini va mushaklar tonusini keskin yaxshilaydi.</p>
+                </div>
+                <div class="about-card glass-panel">
+                    <div class="icon-wrap glow-green-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                            <line x1="9" y1="9" x2="9.01" y2="9" />
+                            <line x1="15" y1="9" x2="15.01" y2="9" />
+                        </svg>
+                    </div>
+                    <h3>Ruhiy xotirjamlik</h3>
+                    <p>Havoda parvoz qilish meditatsiya holatiga kirishga yordam beradi va stressni yengadi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directions Section -->
+    <section class="directions" id="directions">
+        <div class="container fade-in">
+            <h2 class="section-title text-center">Bizning Yo'nalishlar</h2>
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <div class="dir-card glass-panel group">
+                    <div class="card-image-wrap">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" preserveAspectRatio="none">
+                            <rect width="400" height="200" fill="#1A1B26" />
+                            <path d="M0,100 Q100,50 200,100 T400,100" fill="none" stroke="#00F0FF" stroke-width="3"
+                                filter="drop-shadow(0 0 8px #00F0FF)" />
+                            <circle cx="200" cy="100" r="40" fill="none" stroke="#00F0FF" stroke-width="2" />
+                            <text x="200" y="105" fill="#fff" font-size="20" font-family="Space Grotesk"
+                                text-anchor="middle">YOGA</text>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Antigravity Yoga</h3>
+                        <p>Chuqur cho'zilish va meditatsiya orqali tana va ong muvozanatini topish. Orqa bloklarni
+                            yechish uchun ideal.</p>
+                        <button class="link-btn">Batafsil <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></button>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="dir-card glass-panel group border-violet">
+                    <div class="card-image-wrap">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" preserveAspectRatio="none">
+                            <rect width="400" height="200" fill="#1A1B26" />
+                            <path d="M0,150 L100,50 L200,150 L300,50 L400,150" fill="none" stroke="#7000FF"
+                                stroke-width="3" filter="drop-shadow(0 0 8px #7000FF)" />
+                            <circle cx="200" cy="100" r="40" fill="none" stroke="#7000FF" stroke-width="2" />
+                            <text x="200" y="105" fill="#fff" font-size="20" font-family="Space Grotesk"
+                                text-anchor="middle">FITNESS</text>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Antigravity Fitness</h3>
+                        <p>Kuch, portlash kuchi va chidamlilikni oshirish. Qorin va bel muskullarini havodagi qarshilik
+                            orqali rivojlantiring.</p>
+                        <button class="link-btn text-violet">Batafsil <svg viewBox="0 0 24 24" width="16" height="16"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></button>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="dir-card glass-panel group border-green">
+                    <div class="card-image-wrap">
+                        <svg width="100%" height="200" viewBox="0 0 400 200" preserveAspectRatio="none">
+                            <rect width="400" height="200" fill="#1A1B26" />
+                            <path d="M0,100 C100,150 150,50 200,100 S300,50 400,100" fill="none" stroke="#39FF14"
+                                stroke-width="3" filter="drop-shadow(0 0 8px #39FF14)" />
+                            <circle cx="200" cy="100" r="40" fill="none" stroke="#39FF14" stroke-width="2" />
+                            <text x="200" y="105" fill="#fff" font-size="20" font-family="Space Grotesk"
+                                text-anchor="middle">KIDS</text>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Antigravity Kids</h3>
+                        <p>Bolalar uchun xavfsiz va qiziqarli mashg'ulotlar. O'yin orqali tanani qotirish, akrobatik
+                            qobiliyatlarni o'stirish.</p>
+                        <button class="link-btn text-green">Batafsil <svg viewBox="0 0 24 24" width="16" height="16"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule" id="schedule">
+        <div class="container fade-in">
+            <div class="schedule-header">
+                <h2 class="section-title">Darslar Jadvali</h2>
+                <div class="calendar-controls">
+                    <button class="cal-btn active">Dush-Chor-Juma</button>
+                    <button class="cal-btn">Sesh-Pay-Shan</button>
+                </div>
+            </div>
+
+            <div class="schedule-table glass-panel">
+                <div class="table-row table-head">
+                    <div>Soat</div>
+                    <div>Dushanba</div>
+                    <div>Chorshanba</div>
+                    <div>Juma</div>
+                </div>
+                <div class="table-row">
+                    <div class="time">09:00 - 10:00</div>
+                    <div class="slot bookable" data-lesson="Yoga (A.Kamila)">Yoga <span
+                            class="slot-trainer">A.Kamila</span></div>
+                    <div class="slot bookable" data-lesson="Fitness (R.Alisher)">Fitness <span
+                            class="slot-trainer">R.Alisher</span></div>
+                    <div class="slot bookable" data-lesson="Yoga (A.Kamila)">Yoga <span
+                            class="slot-trainer">A.Kamila</span></div>
+                </div>
+                <div class="table-row">
+                    <div class="time">15:00 - 16:00</div>
+                    <div class="slot full">Kids <span class="slot-trainer">B.Malika (To'q)</span></div>
+                    <div class="slot empty">-</div>
+                    <div class="slot bookable" data-lesson="Kids (B.Malika)">Kids <span
+                            class="slot-trainer">B.Malika</span></div>
+                </div>
+                <div class="table-row">
+                    <div class="time">19:00 - 20:00</div>
+                    <div class="slot bookable" data-lesson="Fitness PRO (R.Alisher)">Fitness PRO <span
+                            class="slot-trainer">R.Alisher</span></div>
+                    <div class="slot bookable" data-lesson="Yoga (N.Dildora)">Yoga <span
+                            class="slot-trainer">N.Dildora</span></div>
+                    <div class="slot full">Fitness PRO <span class="slot-trainer">(To'q)</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership / Pricing -->
+    <section class="membership" id="membership">
+        <div class="container fade-in">
+            <h2 class="section-title text-center">Tariflar</h2>
+            <div class="pricing-grid">
+                <!-- Basic -->
+                <div class="pricing-card glass-panel">
+                    <h4>8 Dars</h4>
+                    <div class="price">400,000 <span>UZS</span></div>
+                    <p class="price-desc">1 oy davomida amal qiladi</p>
+                    <ul class="features-list">
+                        <li>Istalgan guruh darslariga kirish</li>
+                        <li>Yoga va Fitness yo'nalishlari</li>
+                        <li>Ertalabki guruhlar uchun</li>
+                    </ul>
+                    <button class="btn btn-outline w-100 btn-pay" data-plan="8_dars">Sotib olish</button>
+                </div>
+                <!-- VIP / Pro -->
+                <div class="pricing-card glass-panel highlight border-blue relative">
+                    <div class="popular-badge">Eng xaridorgir</div>
+                    <h4>12 Dars</h4>
+                    <div class="price text-accent">550,000 <span>UZS</span></div>
+                    <p class="price-desc">1 oy davomida amal qiladi</p>
+                    <ul class="features-list">
+                        <li>Istalgan vaqtda kirish</li>
+                        <li>Barcha yo'nalishlar + PRO</li>
+                        <li>Ustuvor dars band qilish</li>
+                        <li>Bepul shaxsiy shkaf</li>
+                    </ul>
+                    <button class="btn btn-primary w-100 glow-btn btn-pay" data-plan="12_dars">Sotib olish</button>
+                </div>
+                <!-- Individual -->
+                <div class="pricing-card glass-panel">
+                    <h4>Individual</h4>
+                    <div class="price">150,000 <span>UZS</span><span class="per-lesson">/dars</span></div>
+                    <p class="price-desc">Murabbiy bilan yakkama-yakka</p>
+                    <ul class="features-list">
+                        <li>Shaxsiy dastur (AI yordamida tiilgan)</li>
+                        <li>O'zingizga qulay vaqt</li>
+                        <li>Maxsus mashq davolash elementlari bilan</li>
+                    </ul>
+                    <button class="btn btn-outline w-100 btn-pay" data-plan="individual">Band qilish</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer border-top glass-panel">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                    ANTI<span class="text-accent">GRAVITY</span>
+                </a>
+                <p>O'zbekistondagi birinchi yuqori texnologik Antigravity Yoga va Fitness zali.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Menyular</h4>
+                <ul>
+                    <li><a href="#about">Biz haqimizda</a></li>
+                    <li><a href="#directions">Yo'nalishlar</a></li>
+                    <li><a href="#schedule">Jadval</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Aloqa</h4>
+                <p>📍 Toshkent, Yunusobod tumani, 4-daha</p>
+                <p>📞 +998 90 123-45-67</p>
+                <div class="social-icons">
+                    <a href="#" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                        </svg></a>
+                    <a href="#" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
+                    <!-- Telegram Icon -->
+                    <a href="#" class="social-link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13m11-11L2 9l9 4 4 9 7-22z" />
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Antigravity. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+
+    <!-- Registration / Auth Modal -->
+    <div class="modal" id="reg-modal">
+        <div class="modal-content glass-panel text-center">
+            <button class="close-modal">&times;</button>
+            <h3 class="modal-title">Xush kelibsiz!</h3>
+            <p>Ro'yxatdan o'tish yoki tizimga kirish uchun Google hisobingizdan foydalaning.</p>
+            
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <!-- Google Sign-In Button Container -->
+                <div id="google-btn-wrapper"></div>
+            </div>
+
+            <p class="text-sm text-gray" style="margin-top: 20px;">Tizimga kirish orqali siz ommaviy ofertaga rozilik bildirasiz.</p>
+        </div>
+    </div>
+
+    <!-- AI Lesson Guide Modal -->
+    <div class="modal" id="ai-modal">
+        <div class="modal-content glass-panel border-violet">
+            <button class="close-modal">&times;</button>
+            <h3 class="modal-title text-violet"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                    stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 5px;">
+                    <path
+                        d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+                </svg> AI Maslahatchi</h3>
+            <p>Maqsadingiz va holatingizni ayting, men sizga yo'nalish topib beraman.</p>
+            <div id="ai-chat-body" class="ai-chat-body">
+                <div class="chat-bubble bot">Salom! Sizni zalimizda ko'rishdan xursandmiz. Asosiy maqsadingiz nima?
+                    (Masalan: "Belim og'riydi, ozgincha cho'zilish kerak" yoki "Ozmoqchiman")</div>
+            </div>
+            <form id="ai-form" class="ai-form">
+                <input type="text" id="ai-input" placeholder="Shu yerga yozing..." required autocomplete="off">
+                <button type="submit">→</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard/Cabinet Overlay (Mockup) -->
+    <div class="panel-overlay" id="dashboard-panel">
+        <div class="dashboard-sidebar glass-panel">
+            <button class="close-panel" id="close-dashboard">&times;</button>
+            <div class="user-info">
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </div>
+                <div>
+                    <h4>Foydalanuvchi</h4>
+                    <p class="text-sm text-gray">+998 90 123 45 67</p>
+                </div>
+            </div>
+
+            <div class="dash-stats">
+                <div class="stat-box">
+                    <span class="val">5</span>
+                    <span class="label">Qolgan dars</span>
+                </div>
+                <div class="stat-box">
+                    <span class="val">Erta</span>
+                    <span class="label">Keyingi qatnash.</span>
+                </div>
+            </div>
+
+            <h5 class="dash-subtitle">Mening dasturim</h5>
+            <div class="upcoming-lesson glass-panel bg-darker">
+                <div class="tag glow-badge m-b">Antigravity Yoga</div>
+                <p>📆 Ertaga, Dushanba</p>
+                <p>⏰ 09:00 - 10:00</p>
+                <p>🧑‍🏫 A.Kamila</p>
+                <div class="dash-btns mt-2">
+                    <button class="btn btn-outline text-red text-sm py-1 border-red">Bekor qilish</button>
+                    <button class="btn btn-primary glow-btn text-sm py-1">Telegram kvit.</button>
+                </div>
+            </div>
+
+            <div class="qr-code-box mt-3 text-center">
+                <p class="text-sm text-gray m-b">Zalga kirish QR kodi</p>
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                    <rect width="100" height="100" fill="#fff" rx="5" />
+                    <path d="M10 10h30v30H10zm10 10h10v10H20z" fill="#0B0B0F" />
+                    <path d="M60 10h30v30H60zm10 10h10v10H70z" fill="#0B0B0F" />
+                    <path d="M10 60h30v30H10zm10 10h10v10H20z" fill="#0B0B0F" />
+                    <path d="M50 50h10v10H50zM70 50h10v10H70zM50 70h10v10H50zM80 80h10v10H80zM60 60h10v10H60z"
+                        fill="#0B0B0F" />
+                </svg>
+            </div>
+
+            <button class="btn btn-outline w-100 mt-auto btn-logout">Chiqish</button>
+        </div>
+    </div>
+
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
