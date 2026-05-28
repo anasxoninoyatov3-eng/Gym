@@ -768,7 +768,7 @@ section {
 .dashboard-sidebar {
     position: fixed;
     top: 0; right: -500px;
-    width: 500px;
+    width: 600px;
     height: 100vh;
     background: #0B0B0F;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
@@ -777,6 +777,8 @@ section {
     z-index: 2000;
     padding: 2.5rem;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 .panel-overlay.show .dashboard-sidebar {
     right: 0;
@@ -889,9 +891,14 @@ section {
     border: 1px solid rgba(0, 240, 255, 0.2);
     border-radius: 12px;
     padding: 20px;
+    width: 300px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 10px;
 }
 
 .premium-card::before {
@@ -904,8 +911,13 @@ section {
 }
 
 .card-header {
+    display: flex;
+    justify-content: center;
     margin-bottom: 10px;
+    gap: 20px;
 }
+
+
 
 .detail-row {
     display: flex;
