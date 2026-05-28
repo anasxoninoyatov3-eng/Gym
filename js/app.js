@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // --- Navbar Scroll Effect ---
     const navbar = document.getElementById("navbar");
     window.addEventListener("scroll", () => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rootMargin: "0px 0px -50px 0px"
     };
 
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    const appearOnScroll = new IntersectionObserver(function (entries, observer) {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
             entry.target.classList.add('appear');
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const regModal = document.getElementById('reg-modal');
     const aiModal = document.getElementById('ai-modal');
     const dashboardPanel = document.getElementById('dashboard-panel');
-    
+
     // Open Buttons
     const btnHeroCta = document.getElementById('btn-hero-cta');
     const btnPrimaryCta = document.getElementById('btn-primary-cta');
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event Listeners for Opening
     [btnHeroCta, btnPrimaryCta, ...payBtns, ...bookableSlots].forEach(btn => {
-        if(btn) {
+        if (btn) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal(regModal);
@@ -60,14 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if(btnAiGuide) {
+    if (btnAiGuide) {
         btnAiGuide.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(aiModal);
         });
     }
 
-    if(btnLogin) {
+    if (btnLogin) {
         btnLogin.addEventListener('click', (e) => {
             e.preventDefault();
             dashboardPanel.classList.add('show');
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    if(closeDashboardBtn) {
+    if (closeDashboardBtn) {
         closeDashboardBtn.addEventListener('click', () => {
             dashboardPanel.classList.remove('show');
         });
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Bu funksiya google script yuklangandan keyin yoki sahifa yuklanganda ishlaydi
     function initGoogleAuth() {
-        if(typeof google === 'undefined') {
+        if (typeof google === 'undefined') {
             console.error("Google script not loaded");
             return;
         }
@@ -112,10 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const btnWrapper = document.getElementById("google-btn-wrapper");
-        if(btnWrapper) {
+        if (btnWrapper) {
             google.accounts.id.renderButton(
                 btnWrapper,
-                { theme: "outline", size: "large", text: "continue_with" } 
+                { theme: "filled_black", size: "large", shape: "pill", text: "continue_with" }
             );
         }
     }
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Encoded JWT ID token: " + response.credential);
         // Bu joyda token backendga jo'natiladi. Hozircha login bo'ldi deb hisoblaymiz.
         closeModal(regModal);
-        
+
         // Kabinetni ochish
         dashboardPanel.classList.add('show');
     }
@@ -142,11 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const aiInput = document.getElementById('ai-input');
     const aiChatBody = document.getElementById('ai-chat-body');
 
-    if(aiForm) {
+    if (aiForm) {
         aiForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const userText = aiInput.value.trim();
-            if(!userText) return;
+            if (!userText) return;
 
             // Append User Message
             const userDiv = document.createElement('div');
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
             userDiv.innerText = userText;
             aiChatBody.appendChild(userDiv);
             aiInput.value = '';
-            
+
             // Scroll to bottom
             aiChatBody.scrollTop = aiChatBody.scrollHeight;
 
@@ -162,12 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 const botDiv = document.createElement('div');
                 botDiv.className = 'chat-bubble bot';
-                
+
                 // Super basic Logic
                 userText.toLowerCase();
-                if(userText.includes('ozish') || userText.includes('fitness')) {
+                if (userText.includes('ozish') || userText.includes('fitness')) {
                     botDiv.innerHTML = "Sizga <strong>Antigravity Fitness</strong> yo'nalishimizni va murabbiyimiz R.Alisher darslarini tavsiya qilaman. Chidamlilikni oshirish va kaloriyalarni tez yoqishga yordam beradi! <br><br> <a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>";
-                } else if(userText.includes('bel') || userText.includes('og\'riq') || userText.includes('cho\'zilish') || userText.includes('yoga')) {
+                } else if (userText.includes('bel') || userText.includes('og\'riq') || userText.includes('cho\'zilish') || userText.includes('yoga')) {
                     botDiv.innerHTML = "Orqa miya og'riqlari uchun <strong>Antigravity Yoga</strong> eng yaxshi yechim. A.Kamila yoki N.Dildora murabbiylarimizning darslari sizga mos. <br><br> <a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>";
                 } else {
                     botDiv.innerHTML = "Juda ajoyib maqsad! Sizga individual yondashuv tavsiya qilamiz. Asosiy sahifadan 'Bepul sinov' orqali yozilsangiz murabbiy o'zi siz bilan bog'lanib maslahat beradi.";
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 aiChatBody.appendChild(botDiv);
                 aiChatBody.scrollTop = aiChatBody.scrollHeight;
-                
+
                 // Add listener to inside links to close modal and scroll
                 const insideLinks = botDiv.querySelectorAll('a');
                 insideLinks.forEach(l => {
