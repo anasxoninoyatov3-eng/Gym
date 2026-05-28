@@ -180,6 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
             picture: responsePayload.picture
         }));
 
+        // Shaxsiy jadvalni ochish
+        document.getElementById('personal-plan-box').style.display = 'block';
+        document.getElementById('plan-user-name').innerText = responsePayload.name;
+
         closeModal(regModal);
 
         // Kabitnetdi ochish
@@ -191,19 +195,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedUser) {
         try {
             const user = JSON.parse(savedUser);
+            // Kabinet update
             document.getElementById('user-name-display').innerText = user.name;
             document.getElementById('user-email-display').innerText = user.email;
-            if (user.picture) {
+            if(user.picture) {
                 document.getElementById('user-avatar-display').innerHTML = `<img src="${user.picture}" alt="Avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
             }
-        } catch (e) { }
-    }
+            
+            // Shaxsiy AI Jadval aktiv qilish
+            document.getElementById('personal-plan-box').style.display = 'block';
+            document.getElementById('plan-user-name').innerText = user.name;
 
-    // Call init if google is already there, or wait for it
-    if (typeof google !== 'undefined') {
-        initGoogleAuth();
-    } else {
-        window.addEventListener('load', initGoogleAuth);
+        } catch(e) {}
     }
 
     // --- Logout (Chiqish) ---
