@@ -389,8 +389,7 @@
                 </svg> AI Maslahatchi</h3>
             <p>Maqsadingiz va holatingizni ayting, men sizga yo'nalish topib beraman.</p>
             <div id="ai-chat-body" class="ai-chat-body">
-                <div class="chat-bubble bot">Salom! Sizni zalimizda ko'rishdan xursandmiz. Asosiy maqsadingiz nima?
-                    (Masalan: "Belim og'riydi, ozgincha cho'zilish kerak" yoki "Ozmoqchiman")</div>
+                <div class="chat-bubble bot">Salom! Men sizning shaxsiy ozish bo'yicha AI yordamchingizman. To'g'ri standartni hisoblashim uchun bo'yingiz va vazningizni ayting (Masalan: "Bo'yim 170, vaznim 80").</div>
             </div>
             <form id="ai-form" class="ai-form">
                 <input type="text" id="ai-input" placeholder="Shu yerga yozing..." required autocomplete="off">
@@ -404,15 +403,15 @@
         <div class="dashboard-sidebar glass-panel">
             <button class="close-panel" id="close-dashboard">&times;</button>
             <div class="user-info">
-                <div class="avatar">
+                <div class="avatar" id="user-avatar-display">
                     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
                     </svg>
                 </div>
                 <div>
-                    <h4>Foydalanuvchi</h4>
-                    <p class="text-sm text-gray">+998 90 123 45 67</p>
+                    <h4 id="user-name-display">Foydalanuvchi</h4>
+                    <p class="text-sm text-gray" id="user-email-display">Elektron pochta</p>
                 </div>
             </div>
 

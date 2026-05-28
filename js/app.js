@@ -120,11 +120,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // JWT dekodlash funksiyasi
+    function decodeJwtResponse(token) {
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    }
+
     // Callback funksiya login muvaffaqiyatli bulganda ishlaydi
     function handleCredentialResponse(response) {
-        console.log("Encoded JWT ID token: " + response.credential);
-        // Bu joyda token backendga jo'natiladi. Hozircha login bo'ldi deb hisoblaymiz.
+        const responsePayload = decodeJwtResponse(response.credential);
+        
+        // Kabinet panelidagi ma'lumotlarni o'zgartirish
+        document.getElementById('user-name-display').innerText = responsePayload.name;
+        document.getElementById('user-email-display').innerText = responsePayload.email;
+        if(responsePayload.picture) {
+            document.getElementById('user-avatar-display').innerHTML = `<img src="${responsePayload.picture}" alt="Avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        }
+
         closeModal(regModal);
+        
         // Kabitnetdi ochish
         dashboardPanel.classList.add('show');
     }
@@ -161,20 +179,36 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 const botDiv = document.createElement('div');
                 botDiv.className = 'chat-bubble bot';
+                
+                let textParams = userText.toLowerCase().replace(/[^0-9 ]/g, "").trim().split(/\s+/);
+                let numbers = textParams.map(Number).filter(n => n > 0);
 
-                // Super basic Logic
-                userText.toLowerCase();
-                if (userText.includes('ozish') || userText.includes('fitness')) {
-                    botDiv.innerHTML = "Sizga <strong>Antigravity Fitness</strong> yo'nalishimizni va murabbiyimiz R.Alisher darslarini tavsiya qilaman. Chidamlilikni oshirish va kaloriyalarni tez yoqishga yordam beradi! <br><br> <a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>";
-                } else if (userText.includes('bel') || userText.includes('og\'riq') || userText.includes('cho\'zilish') || userText.includes('yoga')) {
-                    botDiv.innerHTML = "Orqa miya og'riqlari uchun <strong>Antigravity Yoga</strong> eng yaxshi yechim. A.Kamila yoki N.Dildora murabbiylarimizning darslari sizga mos. <br><br> <a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>";
+                if(numbers.length >= 2) {
+                    // Tahminiy boy va vaznni aniqlaymiz (kattasi bo'y, kichkinasi vazn)
+                    let height = Math.max(numbers[0], numbers[1]);
+                    let weight = Math.min(numbers[0], numbers[1]);
+                    
+                    // Boyni metrga o'tkazamiz
+                    let heightInMeters = height > 3 ? height / 100 : height; 
+                    
+                    let bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+                    let idealWeight = (height - 100) * 0.9;
+                    let targetDiff = (weight - idealWeight).toFixed(1);
+
+                    if (targetDiff > 5) {
+                         botDiv.innerHTML = `Sizning BMI (Tana vazni indeksi): <strong>${bmi}</strong>. Standart (ideal) vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz ${targetDiff} kg vazn tashlashingiz lozim. Bunga <strong>Antigravity Fitness</strong> orqali oson erishamiz!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>`;
+                    } else if (targetDiff < -5) {
+                         botDiv.innerHTML = `Sizning BMI: <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz biroz vazn to'plashingiz va mushaklarni shakllantirishingiz kerak. Buning uchun <strong>Yoga va Fitness PRO</strong> tavsiya etiladi!`;
+                    } else {
+                         botDiv.innerHTML = `Super! Sizning BMI: <strong>${bmi}</strong>. Vazningiz ideal holatda! Formani ushlab turish va moslashuvchanlik uchun <strong>Antigravity Yoga</strong> darslariga keling.`;
+                    }
                 } else {
-                    botDiv.innerHTML = "Juda ajoyib maqsad! Sizga individual yondashuv tavsiya qilamiz. Asosiy sahifadan 'Bepul sinov' orqali yozilsangiz murabbiy o'zi siz bilan bog'lanib maslahat beradi.";
+                    botDiv.innerHTML = "Iltimos, aniqroq raqamlarni kiriting. Masalan: <strong>175 sm va 80 kg</strong> deb yozing.";
                 }
 
                 aiChatBody.appendChild(botDiv);
                 aiChatBody.scrollTop = aiChatBody.scrollHeight;
-
+                
                 // Add listener to inside links to close modal and scroll
                 const insideLinks = botDiv.querySelectorAll('a');
                 insideLinks.forEach(l => {
