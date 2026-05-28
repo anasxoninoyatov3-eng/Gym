@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Google OAuth Logic ---
     // Make sure to define a configuration logic so it works when the user adds their valid Client ID.
-    const YOUR_GOOGLE_CLIENT_ID = "YOUR_CLIENT_ID_BU_YERGA_YOZILADI.apps.googleusercontent.com"; // <--- CHANGE THIS
+    const YOUR_GOOGLE_CLIENT_ID = "146730977047-59otdu0nej53o1la90kk4clsh3oqfpb3.apps.googleusercontent.com";
 
     // Bu funksiya google script yuklangandan keyin yoki sahifa yuklanganda ishlaydi
     function initGoogleAuth() {
