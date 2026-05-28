@@ -125,8 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Encoded JWT ID token: " + response.credential);
         // Bu joyda token backendga jo'natiladi. Hozircha login bo'ldi deb hisoblaymiz.
         closeModal(regModal);
-
-        // Kabinetni ochish
+        // Kabitnetdi ochish
         dashboardPanel.classList.add('show');
     }
 
