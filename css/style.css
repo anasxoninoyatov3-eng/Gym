@@ -876,3 +876,41 @@ section {
     .nav-links, .nav-actions { display: none; }
     .mobile-menu-btn { display: block; }
 }
+
+/* Premium Dashboard Card Styles */
+.premium-card {
+    background: linear-gradient(145deg, rgba(26, 27, 38, 0.8), rgba(11, 11, 15, 0.9));
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    opacity: 0.5;
+}
+
+.card-header {
+    margin-bottom: 10px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.detail-row svg {
+    color: var(--neon-violet);
+    opacity: 0.8;
+}
