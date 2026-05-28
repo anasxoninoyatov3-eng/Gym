@@ -127,68 +127,77 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- Google OAuth Logic ---
-    // Make sure to define a configuration logic so it works when the user adds their valid Client ID.
+    // --- Google OAuth Logic (Oauth 2 Token Client) ---
     const YOUR_GOOGLE_CLIENT_ID = "719607086494-nb31vdrpp5og7chce4r7sd82pbb57480.apps.googleusercontent.com";
+    let tokenClient;
 
-    // Bu funksiya google script yuklangandan keyin yoki sahifa yuklanganda ishlaydi
     function initGoogleAuth() {
         if (typeof google === 'undefined') {
-            console.error("Google script not loaded");
+            setTimeout(initGoogleAuth, 100);
             return;
         }
-
-        google.accounts.id.initialize({
+        
+        tokenClient = google.accounts.oauth2.initTokenClient({
             client_id: YOUR_GOOGLE_CLIENT_ID,
-            callback: handleCredentialResponse
+            scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+            callback: (tokenResponse) => {
+                if (tokenResponse && tokenResponse.access_token) {
+                    fetchUserProfile(tokenResponse.access_token);
+                }
+            },
         });
+    }
+    initGoogleAuth();
 
-        const btnWrapper = document.getElementById("google-btn-wrapper");
-        if (btnWrapper) {
-            google.accounts.id.renderButton(
-                btnWrapper,
-                { theme: "filled_black", size: "large", shape: "pill", text: "continue_with" }
-            );
-        }
+    function fetchUserProfile(accessToken) {
+        fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            handleRealLogin(data);
+        })
+        .catch(err => console.error("Error fetching user info", err));
     }
 
-    // JWT dekodlash funksiyasi
-    function decodeJwtResponse(token) {
-        let base64Url = token.split('.')[1];
-        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        return JSON.parse(jsonPayload);
-    }
-
-    // Callback funksiya login muvaffaqiyatli bulganda ishlaydi
-    function handleCredentialResponse(response) {
-        const responsePayload = decodeJwtResponse(response.credential);
-
+    function handleRealLogin(user) {
         // Kabinet panelidagi ma'lumotlarni o'zgartirish
-        document.getElementById('user-name-display').innerText = responsePayload.name;
-        document.getElementById('user-email-display').innerText = responsePayload.email;
-        if (responsePayload.picture) {
-            document.getElementById('user-avatar-display').innerHTML = `<img src="${responsePayload.picture}" alt="Avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        const nameDisplay = document.getElementById('user-name-display');
+        const emailDisplay = document.getElementById('user-email-display');
+        const avatarDisplay = document.getElementById('user-avatar-display');
+        
+        if (nameDisplay) nameDisplay.innerText = user.name;
+        if (emailDisplay) emailDisplay.innerText = user.email;
+        if (avatarDisplay) {
+            avatarDisplay.innerHTML = `<img src="${user.picture}" alt="Avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
         }
 
-        // LocalStorage ga saqlash, refresh qilinganda chiqib ketmasligi uchun
+        // LocalStorage ga saqlash
         localStorage.setItem('gymUser', JSON.stringify({
-            name: responsePayload.name,
-            email: responsePayload.email,
-            picture: responsePayload.picture
+            name: user.name,
+            email: user.email,
+            picture: user.picture
         }));
 
-        // Shaxsiy jadvalni ochish
-        document.getElementById('personal-plan-box').style.display = 'block';
-        document.getElementById('plan-user-name').innerText = responsePayload.name;
-
+        // Modal yopish va Kabinet ochish
         closeModal(regModal);
-
-        // Kabitnetdi ochish
         openDashboard();
     }
+
+    const customGoogleBtn = document.getElementById("custom-google-btn");
+    if (customGoogleBtn) {
+        customGoogleBtn.addEventListener("click", () => {
+            if (tokenClient) {
+                tokenClient.requestAccessToken();
+            } else {
+                console.error("Google Token Client is not initialized yet.");
+            }
+        });
+    }
+
+    // Old unused JWT function removed
 
     // Refresh qilinganda foydalanuvchini tiklash
     const savedUser = localStorage.getItem('gymUser');
@@ -198,15 +207,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // Kabinet update
             document.getElementById('user-name-display').innerText = user.name;
             document.getElementById('user-email-display').innerText = user.email;
-            if(user.picture) {
+            if (user.picture) {
                 document.getElementById('user-avatar-display').innerHTML = `<img src="${user.picture}" alt="Avatar" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
             }
-            
+
             // Shaxsiy AI Jadval aktiv qilish
             document.getElementById('personal-plan-box').style.display = 'block';
             document.getElementById('plan-user-name').innerText = user.name;
 
-        } catch(e) {}
+        } catch (e) { }
     }
 
     // --- Logout (Chiqish) ---
@@ -266,20 +275,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Tahminiy boy va vaznni aniqlaymiz (kattasi bo'y, kichkinasi vazn)
                     let height = Math.max(numbers[0], numbers[1]);
                     let weight = Math.min(numbers[0], numbers[1]);
-                    
+
                     // Boyni metrga o'tkazamiz
-                    let heightInMeters = height > 3 ? height / 100 : height; 
-                    
+                    let heightInMeters = height > 3 ? height / 100 : height;
+
                     let bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
                     let idealWeight = (height - 100) * 0.9;
                     let targetDiff = (weight - idealWeight).toFixed(1);
 
                     if (targetDiff > 5) {
-                         botDiv.innerHTML = `Sizning tana vazni indeksi (BMI): <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz yana ${targetDiff} kg vazn tashlashingiz lozim. Bunga <strong>EliteForm Fitness</strong> bilan tezroq erishamiz!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>`;
+                        botDiv.innerHTML = `Sizning tana vazni indeksi (BMI): <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz yana ${targetDiff} kg vazn tashlashingiz lozim. Bunga <strong>EliteForm Fitness</strong> bilan tezroq erishamiz!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>`;
                     } else if (targetDiff < -5) {
-                         botDiv.innerHTML = `Sizning BMI: <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz biroz vazn to'plashingiz va mushaklarni shakllantirishingiz kerak. Buning uchun <strong>Yoga va Fitness PRO</strong> tavsiya etiladi!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Dars jadvali</a>`;
+                        botDiv.innerHTML = `Sizning BMI: <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz biroz vazn to'plashingiz va mushaklarni shakllantirishingiz kerak. Buning uchun <strong>Yoga va Fitness PRO</strong> tavsiya etiladi!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Dars jadvali</a>`;
                     } else {
-                         botDiv.innerHTML = `Super natija! Sizning BMI: <strong>${bmi}</strong>. Vazningiz ideal holatda! Formani doim mo'tadil ushlab turish va zavq uchun <strong>EliteForm Yoga</strong> darslariga keling.`;
+                        botDiv.innerHTML = `Super natija! Sizning BMI: <strong>${bmi}</strong>. Vazningiz ideal holatda! Formani doim mo'tadil ushlab turish va zavq uchun <strong>EliteForm Yoga</strong> darslariga keling.`;
                     }
                 } else {
                     botDiv.innerHTML = "Kechirasiz, men asosan fitnes, sport va jismoniy holat bo'yicha yordam bera olaman. Iltimos jismoniy holat/qaddu qomat bo'yicha biron gap yozing yoki bo'yingiz (masalan, 175) hamda vazningizni (masalan 80) qoldiring, men hisoblayman.";

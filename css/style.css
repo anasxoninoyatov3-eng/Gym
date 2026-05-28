@@ -153,6 +153,28 @@ ul {
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
 }
 
+.btn-google {
+    background: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-google:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+}
+
 .badge {
     display: inline-block;
     padding: 4px 12px;
