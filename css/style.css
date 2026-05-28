@@ -934,8 +934,12 @@ section {
 }
 
 /* Custom Webkit Scrollbar elements globally */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--neon-violet) #0B0B0F;
+}
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 ::-webkit-scrollbar-track {
     background: #0B0B0F; 

@@ -247,30 +247,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 const botDiv = document.createElement('div');
                 botDiv.className = 'chat-bubble bot';
 
-                let textParams = userText.toLowerCase().replace(/[^0-9 ]/g, "").trim().split(/\s+/);
-                let numbers = textParams.map(Number).filter(n => n > 0);
+                let lowerText = userText.toLowerCase();
+                let numbersInfo = userText.match(/\d+/g);
+                let numbers = numbersInfo ? numbersInfo.map(Number) : [];
 
-                if (numbers.length >= 2) {
+                if (lowerText.includes('salom') || lowerText.includes('hayr') || lowerText.includes('hello') || lowerText.includes('assalom')) {
+                    botDiv.innerHTML = "Salom xush kelibsiz! Men EliteForm fitness maslahatchisiman. Sizga qanday yordam bera olaman? Ozish, semirish yoki shunchaki formani ushlab turishni hohlaysizmi? Yoki bo'yingiz va vazningizni ayting, sizga aniq dastur tuzib beraman.";
+                } else if (lowerText.includes('ozish') || lowerText.includes('qorin') || lowerText.includes('ves') || lowerText.includes('ozmoq')) {
+                    botDiv.innerHTML = "Ajoyib maqsad! Ozish uchun aerobik va kuch mashqlari muhim. Bizning <strong>EliteForm Fitness</strong> darslarimiz aynan sizga mos. O'z vazningiz va bo'yingizni (sm va kg) aytsangiz, aniqroq qancha vazn tashlash kerakligini hisoblab beraman.";
+                } else if (lowerText.includes('semirish') || lowerText.includes('massa') || lowerText.includes('ozgin')) {
+                    botDiv.innerHTML = "Massa (mushak) yig'ish uchun asosan kuch mashqlari va to'g'ri ovqatlanish tavsiya qilinadi! <strong>EliteForm Fitness PRO</strong> darsimizga kelsangiz, siz bilan shaxsiy murabbiy ishlaydi.";
+                } else if (lowerText.includes('narx') || lowerText.includes('pul') || lowerText.includes('qancha') || lowerText.includes('tarif')) {
+                    botDiv.innerHTML = "Narxlarimiz juda qulay! Barcha yo'nalishlar (Yoga, Fitness) oylik atigi <strong>400,000 so'm</strong>, Individual (yakkama-yakka) esa 150ming so'm. <br><br><a href='#pricing' style='color:#00F0FF; text-decoration:underline;'>Tariflarni batafsil ko'rish</a>";
+                } else if (numbers.length >= 2) {
                     // Tahminiy boy va vaznni aniqlaymiz (kattasi bo'y, kichkinasi vazn)
                     let height = Math.max(numbers[0], numbers[1]);
                     let weight = Math.min(numbers[0], numbers[1]);
-
+                    
                     // Boyni metrga o'tkazamiz
-                    let heightInMeters = height > 3 ? height / 100 : height;
-
+                    let heightInMeters = height > 3 ? height / 100 : height; 
+                    
                     let bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
                     let idealWeight = (height - 100) * 0.9;
                     let targetDiff = (weight - idealWeight).toFixed(1);
 
                     if (targetDiff > 5) {
-                        botDiv.innerHTML = `Sizning BMI (Tana vazni indeksi): <strong>${bmi}</strong>. Standart (ideal) vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz ${targetDiff} kg vazn tashlashingiz lozim. Bunga <strong>Antigravity Fitness</strong> orqali oson erishamiz!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>`;
+                         botDiv.innerHTML = `Sizning tana vazni indeksi (BMI): <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz yana ${targetDiff} kg vazn tashlashingiz lozim. Bunga <strong>EliteForm Fitness</strong> bilan tezroq erishamiz!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Jadvalni ko'rish</a>`;
                     } else if (targetDiff < -5) {
-                        botDiv.innerHTML = `Sizning BMI: <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz biroz vazn to'plashingiz va mushaklarni shakllantirishingiz kerak. Buning uchun <strong>Yoga va Fitness PRO</strong> tavsiya etiladi!`;
+                         botDiv.innerHTML = `Sizning BMI: <strong>${bmi}</strong>. Standart vazningiz taxminan <strong>${Math.round(idealWeight)} kg</strong> bo'lishi kerak.<br>Siz biroz vazn to'plashingiz va mushaklarni shakllantirishingiz kerak. Buning uchun <strong>Yoga va Fitness PRO</strong> tavsiya etiladi!<br><br><a href='#schedule' style='color:#00F0FF; text-decoration:underline;'>Dars jadvali</a>`;
                     } else {
-                        botDiv.innerHTML = `Super! Sizning BMI: <strong>${bmi}</strong>. Vazningiz ideal holatda! Formani ushlab turish va moslashuvchanlik uchun <strong>Antigravity Yoga</strong> darslariga keling.`;
+                         botDiv.innerHTML = `Super natija! Sizning BMI: <strong>${bmi}</strong>. Vazningiz ideal holatda! Formani doim mo'tadil ushlab turish va zavq uchun <strong>EliteForm Yoga</strong> darslariga keling.`;
                     }
                 } else {
-                    botDiv.innerHTML = "Iltimos, aniqroq raqamlarni kiriting. Masalan: <strong>175 sm va 80 kg</strong> deb yozing.";
+                    botDiv.innerHTML = "Kechirasiz, men asosan fitnes, sport va jismoniy holat bo'yicha yordam bera olaman. Iltimos jismoniy holat/qaddu qomat bo'yicha biron gap yozing yoki bo'yingiz (masalan, 175) hamda vazningizni (masalan 80) qoldiring, men hisoblayman.";
                 }
 
                 aiChatBody.appendChild(botDiv);
