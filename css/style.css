@@ -766,20 +766,17 @@ section {
     pointer-events: all;
 }
 .dashboard-sidebar {
-    position: absolute;
-    top: 0;
-    right: -400px;
-    width: 100%;
-    max-width: 350px;
-    height: 100%;
-    border-radius: 0;
-    border-top: none;
-    border-bottom: none;
-    border-right: none;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: 0; right: -500px;
+    width: 500px;
+    height: 100vh;
+    background: #0B0B0F;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.8);
     transition: right 0.4s ease;
+    z-index: 2000;
+    padding: 2.5rem;
+    overflow-y: auto;
 }
 .panel-overlay.show .dashboard-sidebar {
     right: 0;
@@ -787,18 +784,27 @@ section {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
-.avatar {
-    width: 50px;
-    height: 50px;
+.user-info .avatar {
+    width: 55px;
+    height: 55px;
+    background: rgba(112, 0, 255, 0.1);
     border-radius: 50%;
-    background: rgba(0,240,255,0.1);
-    color: var(--accent-blue);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    color: var(--neon-violet);
+    flex-shrink: 0;
+}
+.user-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
 }
 .dash-stats {
     display: grid;
@@ -913,4 +919,32 @@ section {
 .detail-row svg {
     color: var(--neon-violet);
     opacity: 0.8;
+}
+
+/* Custom Webkit Scrollbar elements globally */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0B0B0F; 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--neon-violet); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-blue); 
+}
+
+/* AI Chat specific slim scrollbar */
+.ai-chat-body::-webkit-scrollbar {
+    width: 5px;
+}
+.ai-chat-body::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02); 
+    border-radius: 10px;
+}
+.ai-chat-body::-webkit-scrollbar-thumb {
+    background: rgba(112, 0, 255, 0.5); 
+    border-radius: 10px;
 }
